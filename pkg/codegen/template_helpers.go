@@ -39,7 +39,7 @@ var (
 	contentTypesYAML    = []string{"application/yaml", "application/x-yaml", "text/yaml", "text/x-yaml"}
 	contentTypesXML     = []string{"application/xml", "text/xml", "application/problems+xml"}
 
-	responseTypeSuffix = "Response"
+	responseTypeSuffix = "HTTPResponse"
 
 	titleCaser = cases.Title(language.English)
 )
