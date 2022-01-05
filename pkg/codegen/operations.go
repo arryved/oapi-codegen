@@ -300,6 +300,9 @@ func (o *OperationDefinition) GetResponseTypeDefinitions() ([]ResponseTypeDefini
 						ResponseName:    responseName,
 						ContentTypeName: contentTypeName,
 					}
+					if td.TypeName == "JSON200" {
+						td.TypeName = "Data"
+					}
 					if IsGoTypeReference(contentType.Schema.Ref) {
 						refType, err := RefPathToGoType(contentType.Schema.Ref)
 						if err != nil {
