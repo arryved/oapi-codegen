@@ -212,17 +212,6 @@ func Generate(swagger *openapi3.T, packageName string, opts Options) (string, er
 		return "", fmt.Errorf("error writing imports: %w", err)
 	}
 
-	_, err = w.WriteString(constantDefinitions)
-	if err != nil {
-		return "", fmt.Errorf("error writing constants: %w", err)
-	}
-
-	_, err = w.WriteString(typeDefinitions)
-	if err != nil {
-		return "", fmt.Errorf("error writing type definitions: %w", err)
-
-	}
-
 	if opts.GenerateClient {
 		_, err = w.WriteString(clientOut)
 		if err != nil {
@@ -232,6 +221,17 @@ func Generate(swagger *openapi3.T, packageName string, opts Options) (string, er
 		if err != nil {
 			return "", fmt.Errorf("error writing client: %w", err)
 		}
+	}
+
+	_, err = w.WriteString(constantDefinitions)
+	if err != nil {
+		return "", fmt.Errorf("error writing constants: %w", err)
+	}
+
+	_, err = w.WriteString(typeDefinitions)
+	if err != nil {
+		return "", fmt.Errorf("error writing type definitions: %w", err)
+
 	}
 
 	if opts.GenerateEchoServer {
