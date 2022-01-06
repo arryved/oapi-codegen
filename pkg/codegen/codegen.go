@@ -305,6 +305,7 @@ func Generate(spec *openapi3.T, opts Configuration) (string, error) {
 	_, err = w.WriteString(typeDefinitions)
 	if err != nil {
 		return "", fmt.Errorf("error writing type definitions: %w", err)
+
 	}
 
 	if opts.Generate.Client {
