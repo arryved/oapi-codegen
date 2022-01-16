@@ -1,6 +1,7 @@
 package codegen
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"strings"
@@ -310,7 +311,7 @@ func GenerateGoSchema(sref *openapi3.SchemaRef, path []string) (Schema, error) {
 			outSchema.AdditionalTypes = append(outSchema.AdditionalTypes, typeDef)
 			outSchema.RefType = typeName
 		}
-		//outSchema.RefType = typeName
+		// outSchema.RefType = typeName
 	} else {
 		err := resolveType(schema, path, &outSchema)
 		if err != nil {
@@ -443,6 +444,10 @@ func GenFieldsFromProperties(props []Property) []string {
 		}
 
 		fieldTags := make(map[string]string)
+
+		if urlTag, ok := p.ExtensionProps.Extensions["x-simc-url-tag"]; ok {
+			fieldTags["url"] = strings.ReplaceAll(string(urlTag.(json.RawMessage)), `"`, ``)
+		}
 
 		if p.Required || p.Nullable || !omitEmpty {
 			fieldTags["json"] = p.JsonFieldName
