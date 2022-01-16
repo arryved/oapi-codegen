@@ -698,6 +698,9 @@ func GenerateBodyDefinitions(operationID string, bodyOrRef *openapi3.RequestBody
 		case contentType == "application/json":
 			tag = "JSON"
 			defaultBody = true
+		case "application/x-www-form-urlencoded":
+			tag = "URLEncoded"
+			defaultBody = true
 		case util.IsMediaTypeJson(contentType):
 			tag = mediaTypeToCamelCase(contentType)
 		case strings.HasPrefix(contentType, "multipart/"):
