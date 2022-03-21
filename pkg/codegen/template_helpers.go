@@ -167,7 +167,7 @@ func genResponseUnmarshal(op *OperationDefinition) string {
 				if typeDefinition.ContentTypeName == contentTypeName {
 					caseAction := fmt.Sprintf("var dest %s\n"+
 						"if err := json.Unmarshal(bodyBytes, &dest); err != nil { \n"+
-						" return nil, err \n"+
+						" return response, err \n"+
 						"}\n"+
 						"response.%s = &dest",
 						typeDefinition.Schema.TypeDecl(),
@@ -187,7 +187,7 @@ func genResponseUnmarshal(op *OperationDefinition) string {
 				if typeDefinition.ContentTypeName == contentTypeName {
 					caseAction := fmt.Sprintf("var dest %s\n"+
 						"if err := yaml.Unmarshal(bodyBytes, &dest); err != nil { \n"+
-						" return nil, err \n"+
+						" return response, err \n"+
 						"}\n"+
 						"response.%s = &dest",
 						typeDefinition.Schema.TypeDecl(),
@@ -201,7 +201,7 @@ func genResponseUnmarshal(op *OperationDefinition) string {
 				if typeDefinition.ContentTypeName == contentTypeName {
 					caseAction := fmt.Sprintf("var dest %s\n"+
 						"if err := xml.Unmarshal(bodyBytes, &dest); err != nil { \n"+
-						" return nil, err \n"+
+						" return response, err \n"+
 						"}\n"+
 						"response.%s = &dest",
 						typeDefinition.Schema.TypeDecl(),
