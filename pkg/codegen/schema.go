@@ -722,6 +722,10 @@ func GenFieldsFromProperties(props []Property) []string {
 			fieldTags["url"] = strings.ReplaceAll(string(urlTag.(json.RawMessage)), `"`, ``)
 		}
 
+		if layoutTag, ok := p.ExtensionProps.Extensions["x-simc-layout-tag"]; ok {
+			fieldTags["layout"] = strings.ReplaceAll(string(layoutTag.(json.RawMessage)), `"`, ``)
+		}
+
 		if !omitEmpty {
 			fieldTags["json"] = p.JsonFieldName
 			if p.NeedsFormTag {
